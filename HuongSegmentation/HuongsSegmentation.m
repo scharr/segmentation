@@ -36,7 +36,7 @@ chooseAdventure()
     function segmentImage()
         %% basic segmentation
         %% get image to segment
-        [imgname, path] = uigetfile('*.tif','Select DAPI Image');
+        [imgname, path] = uigetfile('*.tif','Select Nuclei Image');
         filename = [path imgname];
         imDAPI = imread(filename);
 

@@ -35,11 +35,12 @@ for i=1:numel(DirStruct)
     else
         Extension = DirStruct(i).name(Dot:length(DirStruct(i).name));
         if isequal(Extension,OldExtension)
-            %movefile(DirStruct(i).name,[DirStruct(i).name(1:Dot-1) NewExtension]);
-            java.io.File(DirStruct(i).name).renameTo(java.io.File([DirStruct(i).name(1:Dot-1) NewExtension]));
+            movefile(DirStruct(i).name,[DirStruct(i).name(1:Dot-1) NewExtension]);
+            %DirStruct(i).name
+            %java.io.File(DirStruct(i).name).renameTo(java.io.File([DirStruct(i).name(1:Dot-1) NewExtension]));
         elseif isempty(Dot)
-            % movefile(DirStruct(i).name,[DirStruct(i).name NewExtension]);
-            java.io.File(DirStruct(i).name).renameTo(java.io.File([DirStruct(i).name NewExtension]));
+            movefile(DirStruct(i).name,[DirStruct(i).name NewExtension]);
+            %java.io.File(DirStruct(i).name).renameTo(java.io.File([DirStruct(i).name NewExtension]));
         else
             continue
         end
