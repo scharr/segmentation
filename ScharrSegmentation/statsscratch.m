@@ -2,35 +2,53 @@
 
 % Use a previously made ROI to get intensities from another image
 
-[ROIfilename, path] = uigetfile('*.tif','Select sepROI file');
+[ROIfilename, path] = uigetfile('*.tif','Select labeled ROI file');
 id = [path,ROIfilename];
-sepROI = imread(id);
+labROI = imread(id);
 
-[imagefilename, path] = uigetfile('*.tif','Select imOriginal file');
+[imagefilename, path] = uigetfile('*.tif','Select image file for analysis');
 id = [path,imagefilename];
 imOriginal = imread(id);
 
-basefilename = [path,imagefilename];
+basefilename = [path imagefilename];
 basefilename = basefilename(1:length(basefilename)-4);
 
-getMeanIntensity(imOriginal,sepROI,basefilename);
+getMeanIntensity(imOriginal,labROI,basefilename);
 
 %% try the above in bulk:
 
 % Use a previously made ROI to get intensities from another image
 
-[ROIfilenames, path] = uigetfile('*.tif','Select sepROI file');
-id = [path,ROIfilenames];
-sepROI = imread(id);
+[ROIfilenames, Rpath] = uigetfile('*.tif','Select labeled ROI file(s)','Multiselect','on');
+[imagefilenames, Ipath] = uigetfile('*.tif','Select original image file(s)','Multiselect','on');
 
-[imagefilenames, path] = uigetfile('*.tif','Select imOriginal file');
-id = [path,imagefilenames];
-imOriginal = imread(id);
+if iscell(ROIfilenames) && iscell(imagefilenames) && ...
+    length(ROIfilenames) == length(imagefilenames)
+    for i = 1:length(ROIfilenames)
+        % Read in 1st ROI file
+        Rid = [Rpath,ROIfilenames{i}];
+        labROI = imread(Rid);
+        % Read in 1st Image file
+        Iid = [Ipath,imagefilenames{i}];
+        imOriginal = imread(Iid);
+        
+        basefilename = [path,imagefilenames{i}];
+        basefilename = basefilename(1:length(basefilename)-4);
+        
+        getMeanIntensity(imOriginal,labROI,basefilename);
+    end
+else
+    Rid = [path,ROIfilename];
+    labROI = imread(Rid);
 
-basefilename = [path,imagefilenames];
-basefilename = basefilename(1:length(basefilename)-4);
+    Iid = [path,imagefilename];
+    imOriginal = imread(Iid);
 
-getMeanIntensity(imOriginal,sepROI,basefilename);
+    basefilename = [path imagefilename];
+    basefilename = basefilename(1:length(basefilename)-4);
+
+    getMeanIntensity(imOriginal,labROI,basefilename);  
+end
 
 
 %% get data of one type all in a list
@@ -40,7 +58,7 @@ getMeanIntensity(imOriginal,sepROI,basefilename);
 prompt = {'Enter condition name:'};
 dlg_title = 'Input';
 num_lines = 1;
-def = {files{1}};
+def = files(1);
 condition1 = inputdlg(prompt,dlg_title,num_lines,def);
 
 cond1data = [];

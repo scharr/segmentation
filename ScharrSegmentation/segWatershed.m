@@ -53,7 +53,7 @@ figure, imshow(bgm)
 title('Watershed ridge lines (bgm)')
 
 outlines = uint16(outlines);
-outlines2 = imimposemin(outlines, bgm | fgm);
+outlines2 = imimposemin(outlines, outlines | fgm);
 L = watershed(outlines2);
 
 I4 = uint16(I);

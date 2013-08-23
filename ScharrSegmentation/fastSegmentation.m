@@ -12,8 +12,8 @@ cleanBW = bwAdjust(BW1, imContrastAdjusted);
 
 % imregionalmax method of getting BW image
 % tends to be better for neurosn
-%BW2 = imregionalmax(imContrastAdjusted);
-%cleanBW = bwAdjust(BW2, imContrastAdjusted);
+% BW2 = imregionalmax(imContrastAdjusted);
+% cleanBW = bwAdjust(BW2, imContrastAdjusted);
 
 % try watershed transform
 % outlines = uint16(bwperim(cleanBW));

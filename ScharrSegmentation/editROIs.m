@@ -2,20 +2,20 @@ function [newROI] = editROIs(cleanBW, imContrastAdjusted)
 % editROIs allows you to add and delete ROIs
 
 ROIoverlay(imContrastAdjusted,cleanBW);
-%editoraccept(cleanBW);
 [newROI] = identifyROI(cleanBW);
 
 %% Show ROI outlines around imContrastAdjusted
     function ROIoverlay(imContrastAdjusted, ROI)
         % view the an ROI mask over the data as outlines.
-        %[B,L,N,A] = bwboundaries(R,'noholes');
+        % [B,L,N,A] = bwboundaries(R,'noholes');
         B = bwboundaries(ROI);
-        figure, imshow(imContrastAdjusted); 
+        %figure, imshow(imContrastAdjusted); 
+        imshow(imContrastAdjusted);
         set(gcf, 'Position', get(0,'Screensize'));
         hold on;
         for k=1:length(B)
             boundary = B{k};
-            plot(boundary(:,2), boundary(:,1),'m','LineWidth',.5);
+            plot(boundary(:,2), boundary(:,1),'g','LineWidth',.5);
         end
     end
 
@@ -40,7 +40,7 @@ ROIoverlay(imContrastAdjusted,cleanBW);
                 wait(h);
                 tempROI = createMask(h);
                 newROI = addROI(I, tempROI);
-                close all;
+                %close all;
                 ROIoverlay(imContrastAdjusted,newROI);
                 [newROI] = identifyROI(newROI);
             case 2
@@ -48,7 +48,7 @@ ROIoverlay(imContrastAdjusted,cleanBW);
                 wait(h);
                 tempROI = createMask(h);
                 newROI = addROI(I, tempROI);
-                close all;
+                %close all;
                 ROIoverlay(imContrastAdjusted,newROI);
                 [newROI] = identifyROI(newROI);
             case 3
@@ -56,7 +56,7 @@ ROIoverlay(imContrastAdjusted,cleanBW);
                 wait(h);
                 tempROI = createMask(h);
                 newROI = addROI(I, tempROI);
-                close all;
+                %close all;
                 ROIoverlay(imContrastAdjusted,newROI);
                 [newROI] = identifyROI(newROI);
             case 4
@@ -64,7 +64,7 @@ ROIoverlay(imContrastAdjusted,cleanBW);
                 wait(h);
                 tempROI = createMask(h);
                 newROI = deleteROI(I, tempROI);
-                close all;
+                %close all;
                 ROIoverlay(imContrastAdjusted,newROI);
                 [newROI] = identifyROI(newROI);
             case 5
@@ -72,7 +72,7 @@ ROIoverlay(imContrastAdjusted,cleanBW);
                 wait(h);
                 tempROI = createMask(h);
                 newROI = deleteROI(I, tempROI);
-                close all;
+                %close all;
                 ROIoverlay(imContrastAdjusted,newROI);
                 [newROI] = identifyROI(newROI);
             case 6
@@ -80,7 +80,7 @@ ROIoverlay(imContrastAdjusted,cleanBW);
                 wait(h);
                 tempROI = createMask(h);
                 newROI = deleteROI(I, tempROI);
-                close all;
+                %close all;
                 ROIoverlay(imContrastAdjusted,newROI);
                 [newROI] = identifyROI(newROI);
             case 7
@@ -88,11 +88,11 @@ ROIoverlay(imContrastAdjusted,cleanBW);
                 wait(h);
                 tempROI = createMask(h);
                 newROI = separateROI(I, tempROI);
-                close all;
+                %close all;
                 ROIoverlay(imContrastAdjusted,newROI);
                 [newROI] = identifyROI(newROI);
             case 8 
-                close all;
+                %close all;
                 newROI = I;
                 ROIoverlay(newROI,newROI);
                 [newROI] = identifyROI(newROI);

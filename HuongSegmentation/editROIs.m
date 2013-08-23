@@ -1,8 +1,9 @@
 function [newROI] = editROIs(cleanBW, imContrastAdjusted)
 % editROIs allows you to add and delete ROIs
 
+figure;
+set(gcf, 'Position', get(0,'Screensize'));
 ROIoverlay(imContrastAdjusted,cleanBW);
-%editoraccept(cleanBW);
 [newROI] = identifyROI(cleanBW);
 
 %% Show ROI outlines around imContrastAdjusted
@@ -10,8 +11,9 @@ ROIoverlay(imContrastAdjusted,cleanBW);
         % view the an ROI mask over the data as outlines.
         %[B,L,N,A] = bwboundaries(R,'noholes');
         B = bwboundaries(ROI);
-        figure, imshow(imContrastAdjusted); 
-        set(gcf, 'Position', get(0,'Screensize'));
+        %figure, imshow(imContrastAdjusted); 
+        imshow(imContrastAdjusted);
+        %set(gcf, 'Position', get(0,'Screensize'));
         hold on;
         for k=1:length(B)
             boundary = B{k};
