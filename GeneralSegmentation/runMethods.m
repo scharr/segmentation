@@ -89,9 +89,9 @@ function runMethods()
     baseROIfilename = sprintf('%s_baseROI.tif',basefilename);
     imwrite(newROI,baseROIfilename);
 
-    %% save separated ROIs
+    %% save labeled ROIs
 
-    sepROIfilename = sprintf('%s_sepROI.tif',basefilename);
+    sepROIfilename = sprintf('%s_labROI.tif',basefilename);
     imwrite(labROI,sepROIfilename);
 
 end

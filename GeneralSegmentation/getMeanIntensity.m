@@ -14,6 +14,6 @@ intFile = fopen(intFilename, 'w');
 for i = 1:length(stats)
     fprintf(intFile, '%s\n',num2str(stats(i).MeanIntensity));
 end
-
 fclose(intFile);
+
 end

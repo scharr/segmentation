@@ -11,7 +11,8 @@ function [filename, imOriginal] = getImage(prompt)
 %   Aug 15, 2013
 
     % Open GUI to select a .tif image to segment
-    [imgname, path] = uigetfile('*.tif',prompt);
+    %[imgname, path] = uigetfile('*.tif',prompt);
+    [imgname, path] = uigetfile();
     filename = [path imgname];
     
     % Get the number of images in the .tif file

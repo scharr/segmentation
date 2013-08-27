@@ -1,9 +1,31 @@
 function [methods] = chooseSegmentationMethods()
+    % [methods] = chooseSegmentationMethods() 
+    % Opens a sequence of graphical user interfaces to segment regions of 
+    % interest (ROIs) from a *.tif image. The steps include:
+    %       1. Contrast adjustment
+    %       2. Morphological opening
+    %       3. Conversion to black & white (creation of ROIs)
+    %       4. Manual editing of ROIs with the option to underlay a
+    %          different image. (This is useful if ROI selection is based 
+    %          on a marker different from that used to segment the image.)         
+    %       5. Automatically saving all the images as *.tif files based on
+    %          the filename of the original segmentation image.
+    %       6. Creation of a *.mat file with a structure containing all the
+    %          methods used to create the ROI. This file would be used
+    %          with the runMethods function to automatically apply those
+    %          segmentation methods to a new image
 
-    %% basic segmentation test
-    % get the image
+    %% Get the image
+    % The image to segment must be a *.tif file. 
+    %      1. If the image is a z-stack or timelapse movie, it may be best 
+    %         to make a maximum projection image (say, in ImageJ) first. 
+    %      2. You may also choose to segment off of an image using a marker 
+    %         different from the one you will eventually measure (say, segment 
+    %         off of GFP and then 
 
-    [filename, imOriginal] = getImage('Choose image to segment');
+    [imgname, path] = uigetfile('*.tif','Choose image to segment');
+    filename = [path imgname];
+    imOriginal = imread(filename);
 
     %% adjust the contrast
 
@@ -19,8 +41,7 @@ function [methods] = chooseSegmentationMethods()
 
     %% edits ROIs
     title = 'Choose image to underlay ROI image for editing';
-    choice = menu(title,...
-    'Default','Choose Image');
+    choice = menu(title,'Default','Choose Image');
     % Handle response
     switch choice
         case 1
@@ -48,7 +69,7 @@ function [methods] = chooseSegmentationMethods()
     baseROIfilename = sprintf('%s_baseROI.tif',basefilename);
     imwrite(newROI,baseROIfilename);
 
-    sepROIfilename = sprintf('%s_sepROI.tif',basefilename);
+    sepROIfilename = sprintf('%s_labROI.tif',basefilename);
     imwrite(labROI,sepROIfilename);
 
 end
