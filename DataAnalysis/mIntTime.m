@@ -9,12 +9,9 @@ function [intensities] = mIntTime(tifstk, labROI)
 %       labROI:      label matrix of ROIs
 %       intensities: double 3D matrix 
 %
-%
-%
 %   scharr@stanford.edu
 %   August 26, 2013
-
-
+%
 % (In a previous version, this function took the filenames instead of the
 % images themselves. Uncomment the following two lines to revert)
 %     tif = readTifStack(imfname);

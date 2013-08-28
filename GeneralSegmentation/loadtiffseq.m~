@@ -1,0 +1,14 @@
+function tifm = loadtiffseq(pathname,filename)
+% tifm = loadtiffseq(pathname,filename)
+
+    info=imfinfo(strcat(pathname,filename));
+    nZ = numel(info);
+    rows = info(1).Height;
+    cols = info(1).Width;
+    tifm = zeros(rows,cols,nZ);
+    for i = 1:nZ
+        tifm(:,:,i)=imread(strcat(pathname,filename),i,'Info',info);
+        disp(['reading slice #',int2str(i)]);
+    end
+
+%%% see http://blogs.mathworks.com/steve/2009/04/02/matlab-r2009a-imread-and-multipage-tiffs/
